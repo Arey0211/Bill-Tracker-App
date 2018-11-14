@@ -1,0 +1,25 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <form action="/bills" method="POST">
+          <div class="card text-center default-margin default-padding">
+            <div class="card-header main-color-bg"><h4>Add New Bill</h4></div>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[name]" placeholder="Name of Bill" required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[amountDue]" placeholder="Amount Due" required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[amountPaid]" placeholder="Amount Paid" required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[minDue]" placeholder="Minimum Due" required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[dueDay]" placeholder="Day of Month Due (NUMBER ONLY!!!)" required>
+            <select name="bill[paid]" class="form-control form-control-lg">
+              <option>No</option>
+              <option>Yes</option>
+            </select>            
+            <button class="main-btn" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

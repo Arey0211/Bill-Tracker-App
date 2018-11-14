@@ -1,0 +1,56 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <h1 class="card-header text-center main-color-bg"> <%= debt.name %> </h1>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Amount Owed</th>
+                    <th scope="col">Amount Paid</th>
+                  </tr>
+                </thead>
+                  <tbody>
+                    <th scope="row"> <h2>$ <%= debt.owed %></h2> </th>
+                    <td> <h2>$ <%= debt.amountPaid %></h2> </td>
+                    <td>
+                      <form action="/debts/<%= debt._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-outline-success" href="/debts/<%= debt._id %>/edit">Edit</a>
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  </tbody>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/debts/<%= debt._id %>/notes/new"> <i class="fas fa-plus"></i> Add Note </a>
+              <a class="btn btn-lg btn-outline-secondary" href="/debts"> <i class="fas fa-arrow-left"></i> Go Back </a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                  <h2 class="card-header text-center main-color-bg"><%= debt.name %> Notes</h2>
+                  <div class="card-body">
+                    <% debt.notes.forEach((note) => { %>
+                      <div class="card">
+                        <div class="card-title"> <h6><%= note.date.toDateString() %></h6> </div>
+                        <div class="card-title"> <h3><%= note.body %></h3> </div>
+                        <form action="/debts/<%= debt._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
+                          <a class="btn btn-outline-success" href="/debts/<%= debt._id %>/notes/<%= note._id %>/edit">Edit</a>
+                          <button class="btn btn-outline-danger" type="submit">Delete</button>
+                        </form>
+                      </div>
+                    <% }) %>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

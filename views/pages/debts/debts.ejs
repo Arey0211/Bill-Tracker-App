@@ -1,0 +1,63 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-header main-color-bg text-center">
+          <i class="fas fa-calendar"></i> Month
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Jan</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Feb</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Mar</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Apr</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">May</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Jun</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Jul</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Aug</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Sept</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Oct</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Nov</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/debts">Dec</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <h1 class="card-header text-center main-color-bg">Current Debts</h1>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount Owed</th>
+                    <th scope="col">Amount Paid</th>
+                  </tr>
+                </thead>
+                  <% debts.forEach(function(debt){ %>
+                  <tbody>
+                    <th scope="row"> <p><a class="default-text default-text-hover" href="/debts/<%= debt._id %>"> <%= debt.name %> </a></p></th>
+                    <td> $ <%= debt.owed %> </td>
+                    <td> $ <%= debt.amountPaid %> </td>
+                    <td>
+                      <form action="/debts/<%= debt._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-outline-success" href="/debts/<%= debt._id %>/edit">Edit</a>
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  </tbody>
+                  <% }) %>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/debts/new"> <i class="fas fa-plus"></i> Add New Debt </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

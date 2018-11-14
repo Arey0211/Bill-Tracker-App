@@ -1,0 +1,18 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <form action="/income" method="POST">
+          <div class="card text-center default-margin default-padding">
+            <div class="card-header main-color-bg"><h4>Add Some Money</h4></div>
+            <input class="form-control text-center form-control-lg" type="text" name="income[source]" placeholder="Source of CashFlow" required>
+            <input class="form-control text-center form-control-lg" type="text" name="income[amount]" placeholder="Amount of Cash" required>
+            <button class="main-btn" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

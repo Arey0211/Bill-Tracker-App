@@ -1,0 +1,76 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-header main-color-bg text-center">
+          <i class="fas fa-calendar"></i> Month
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Jan</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Feb</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Mar</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Apr</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">May</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Jun</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Jul</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Aug</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Sept</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Oct</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Nov</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/bills">Dec</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <h1 class="card-header text-center main-color-bg">Current Bills</h1>
+        <div class="card-body">
+          <div class="row">
+              <div class="col-md-3">
+                <a class="btn btn-lg btn-outline-secondary" href="/currentDueBills"> <i class="far fa-eye"></i> Upcoming Bills </a>
+              </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+              <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+            </div>
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total Due</th>
+                    <th scope="col">Minimum Due</th>
+                    <th scope="col">Amount Paid</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Paid</th>
+                  </tr>
+                </thead>
+                  <% bills.forEach(function(bill){ %>
+                  <tbody>
+                    <th scope="row"> <p id="<%= bill.name %>" class="default-text"> <%= bill.name %> </p></th>
+                    <td> $ <%= bill.amountDue %> </td>
+                    <td> $ <%= bill.minDue %> </td>
+                    <td> $ <%= bill.amountPaid %> </td>
+                    <td>   <%= bill.dueDay %> </td>
+                    <td> <%= bill.paid %> </td>
+                    <td>
+                      <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-outline-success" href="/bills/<%= bill._id %>/edit">Edit</a>
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  </tbody>
+                  <% }) %>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

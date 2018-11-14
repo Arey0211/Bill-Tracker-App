@@ -1,0 +1,60 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <h1 class="card-header text-center main-color-bg">Upcoming Bills</h1>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <a class="btn btn-lg btn-outline-secondary" href="/bills"> <i class="far fa-eye"></i> View All Bills </a>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+              <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total Due</th>
+                    <th scope="col">Minimum Due</th>
+                    <th scope="col">Amount Paid</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Paid</th>
+                  </tr>
+                </thead>
+                  <% let x = new Date().getDate(); %>
+                  <% bills.forEach(function(bill){ %>
+                    <% if (x <= bill.dueDay && bill.paid === 'No') { %>
+                  <tbody>
+                    <th scope="row"> <a href="/bills#<%= bill.name %>" id="<%= bill.name %>" class="default-text default-text-hover"> <%= bill.name %> </a></th>
+                    <td> $ <%= bill.amountDue %> </td>
+                    <td> $ <%= bill.minDue %> </td>
+                    <td> $ <%= bill.amountPaid %> </td>
+                    <td>   <%= bill.dueDay %> </td>
+                    <td>   <%= bill.paid %> </td>
+                    <td>
+                      <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-outline-success" href="/bills/<%= bill._id %>/edit">Edit</a>
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  </tbody>
+                    <% } %>
+                  <% }) %>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

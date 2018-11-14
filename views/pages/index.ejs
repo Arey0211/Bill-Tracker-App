@@ -1,0 +1,209 @@
+<% include ../partials/header %>
+
+<div class="head container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="dashboard text-center main-color-bg">
+        <i class="fas fa-cogs"></i> Dashboard
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <a class="btn btn-lg btn-outline-secondary" href="/bills"> <i class="far fa-eye"></i> View Bills </a>
+    </div>
+    <div class="col-md-2">
+      <a class="btn btn-lg btn-outline-secondary" href="/income"> <i class="far fa-eye"></i> View Income </a>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <a class="btn btn-lg btn-outline-secondary" href="/income/new"> <i class="fas fa-plus"></i> Got Cash </a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+    </div>
+    <div class="col-md-1"></div>
+
+
+
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header main-color-bg">
+          <i class="fas fa-cogs"></i> Dashboard
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <a class="default-text default-text-hover" href="/currentDueBills">Upcoming Bills</a>
+            <span class="float-right">
+              <% let currentBills = []; %>
+              <% let currentBillsDate = new Date().getDate(); %>
+              <% bills.forEach((bill) => { %>
+                <% if (currentBillsDate <= bill.dueDay && bill.paid === 'No'){ %>
+                  <% currentBills.push(bill); %>
+                <% } %>
+              <% }) %>
+              <span class="gray-badge"><%= currentBills.length %></span>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <a class="default-text default-text-hover" href="/pastDueBills">Past Due</a>
+            <span class="float-right">
+              <% let pastBills = []; %>
+              <% let pastBillsDate = new Date().getDate(); %>
+              <% bills.forEach((bill) => { %>
+                <% if (pastBillsDate > bill.dueDay && bill.paid === 'No'){ %>
+                  <% pastBills.push(bill); %>
+                <% } %>
+              <% }); %>
+              <span class="red-badge"><%= pastBills.length %></span>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <a class="default-text default-text-hover" href="/debts">Debt</a>
+            <span class="float-right">
+              <span class="gray-badge"><%= debts.length %></span>
+            </span>
+          </li>
+          <li class="list-group-item">
+            <a class="default-text default-text-hover" href="/bills">All Bills</a>
+            <span class="float-right">
+              <span class="gray-badge"><%= bills.length %></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-md-8">
+      <div class="card">
+        <h5 class="card-header text-center main-color-bg">Finances</h5>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card text-center">
+                <h5 class="card-header main-color-bg">Income</h5>
+                <div class="card-body">
+                  <p class="card-text">
+                    <% incomeSum = 0; %>
+                    <% income.forEach((check) => { %>
+                      <% incomeTotal = incomeSum += check.amount; %>
+                    <% }) %>
+                    <h5 class="card-title">$ <%= incomeTotal.toFixed(2) %></h5>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card text-center">
+                <h5 class="card-header main-color-bg">Total Bills</h5>
+                <div class="card-body">
+                  <p class="card-text">
+                    <% sum = 0; %>
+                    <% bills.forEach((bill) => { %>
+                      <% total = sum += bill.amountDue; %>
+                    <% }) %>
+                    <h5 class="card-title">$ <%= total.toFixed(2) %></h5>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card text-center">
+                <h5 class="card-header main-color-bg">Past Due</h5>
+                <div class="card-body">
+                  <p class="card-text">
+                    <% let pastDueBills = []; %>
+                    <% let date = new Date().getDate(); %>
+                    <% bills.forEach((bill) => { %>
+                      <% if (date > bill.dueDay && bill.paid === 'No'){ %>
+                        <% pastDueBills.push(bill); %>
+                      <% } %>
+                    <% }) %>
+                    <h5 class="card-title"> <%= pastDueBills.length %></h5>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card text-center">
+                <h5 class="card-header main-color-bg">Needed</h5>
+                <div class="card-body">
+                  <p class="card-text">
+                    <% billsSum = 0; %>
+                    <% bills.forEach((bill) => { %>
+                      <% billsTotal = billsSum += bill.amountDue; %>
+                    <% }) %>
+
+                    <% newIncomeSum = 0; %>
+                    <% income.forEach((check) => { %>
+                      <% newIncomeTotal = newIncomeSum += check.amount; %>
+                    <% }) %>
+
+                    <% let incomeNeeded = billsTotal - newIncomeTotal %>
+                    <h5 class="card-title">$ <%= incomeNeeded.toFixed(2) %></h5>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-8">
+      <div class="card text-center">
+        <h5 class="card-header main-color-bg">BILLS NOT PAID</h5>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total Due</th>
+                    <th scope="col">Minimum Due</th>
+                    <th scope="col">Amount Paid</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Paid</th>
+                  </tr>
+                </thead>
+                  <% bills.forEach(function(bill){ %>
+                    <% if (bill.paid === 'No') { %>
+                  <tbody>
+                    <th scope="row"><a class="default-text default-text-hover" href="/bills#<%= bill.name %>"> <%= bill.name %> </a></th>
+                    <td> $ <%= bill.amountDue %> </td>
+                    <td> $ <%= bill.minDue %> </td>
+                    <td> $ <%= bill.amountPaid %> </td>
+                    <td>   <%= bill.dueDay %> </td>
+                    <td>   <%= bill.paid %> </td>
+                  </tbody>
+                    <% } %>
+                  <% }) %>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/bills/new"> <i class="fas fa-plus"></i> Add New Bill </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>

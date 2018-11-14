@@ -1,0 +1,25 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <form action="/bills/<%= bill._id %>?_method=PUT" method="POST">
+          <div class="card text-center default-margin default-padding">
+            <div class="card-header main-color-bg"><h4>Edit <%= bill.name %></h4></div>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[name]" value=" <%= bill.name %> " required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[amountDue]" value=" <%= bill.amountDue %> " required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[amountPaid]" value=" <%= bill.amountPaid %> " required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[minDue]" value=" <%= bill.minDue %> " required>
+            <input class="form-control text-center form-control-lg" type="text" name="bill[dueDay]" value=" <%= bill.dueDay %> " required>
+            <select name="bill[paid]" class="form-control form-control-lg">
+              <option>No</option>
+              <option>Yes</option>
+            </select>            
+            <button class="main-btn" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

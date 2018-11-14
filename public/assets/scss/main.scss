@@ -1,0 +1,73 @@
+@import 'base/_reset',
+        'base/_variables',
+
+        'layout/_footer',
+        'layout/_header',
+
+        'modules/_blocks',
+        'modules/_btns',
+        'modules/_components',
+        'modules/_typography';
+
+.main-color-bg {
+  background-color: $bgHighlight;
+  color: $colDefault;
+  padding: 15px;
+  margin: 15px;
+}
+
+.card,
+.list-group-item {
+  background-color: #000 !important;
+  border: 2px solid $colDefault;
+}
+
+td,
+th,
+.card-title {
+  color: $colDefault;
+}
+
+.card-title {
+  padding: 5px 20px 0 20px;
+}
+
+.card {
+  margin-top: 25px;
+}
+
+.default-text {
+  color: $bgDefault;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none !important;
+  background-color: transparent;
+}
+
+.default-text-hover:hover,
+.default-text-hover:focus {
+  color: $colHighlight;
+}
+
+.dashboard {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.red-badge {
+  color: $colDefault;
+  font-weight: bolder;
+  font-size: 22px;
+  background-color: red;
+  padding: 0px 20px;
+  border-radius: 10px;
+}
+
+.gray-badge {
+  color: $colDefault;
+  font-weight: bolder;
+  font-size: 22px;
+  background-color: $bgHighlight;
+  padding: 0px 20px;
+  border-radius: 10px;
+}

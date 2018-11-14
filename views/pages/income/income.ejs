@@ -1,0 +1,63 @@
+<% include ../../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-header main-color-bg text-center">
+          <i class="fas fa-calendar"></i> Month
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Jan</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Feb</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Mar</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Apr</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">May</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Jun</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Jul</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Aug</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Sept</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Oct</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Nov</a></li>
+          <li class="list-group-item"><a class="default-text default-text-hover" href="/income">Dec</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <h1 class="card-header text-center main-color-bg">Income</h1>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Source</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                  <% income.forEach(function(check){ %>
+                  <tbody>
+                    <th scope="row"> <p class="default-text"> <%= check.source %> </p></th>
+                    <td class="default-text"> $ <%= check.amount.toFixed(2) %> </td>
+                    <td class="default-text"> <%= check.date.toDateString() %> </td>
+                    <td>
+                      <form action="/income/<%= check._id %>?_method=DELETE" method="POST">
+                        <a class="btn btn-outline-success" href="/income/<%= check._id %>/edit">Edit</a>
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  </tbody>
+                  <% }) %>
+              </table>
+              <a class="btn btn-lg btn-outline-secondary" href="/income/new"> <i class="fas fa-plus"></i> New Income </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>
