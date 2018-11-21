@@ -7,6 +7,8 @@ It uses the followinf dependencies:
     Method-Override
     EJS
 
+bootstrap and font-awesome are part of the asset files under public folder
+
 It uses the following for Backend and DB:
     Node
     MongoDB
