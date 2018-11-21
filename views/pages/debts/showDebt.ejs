@@ -38,7 +38,6 @@
                         <div class="card-title"> <h6><%= note.date.toDateString() %></h6> </div>
                         <div class="card-title"> <h3><%= note.body %></h3> </div>
                         <form action="/debts/<%= debt._id %>/notes/<%= note._id %>?_method=DELETE" method="POST">
-                          <a class="btn btn-outline-success" href="/debts/<%= debt._id %>/notes/<%= note._id %>/edit">Edit</a>
                           <button class="btn btn-outline-danger" type="submit">Delete</button>
                         </form>
                       </div>

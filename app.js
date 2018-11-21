@@ -242,46 +242,6 @@ app.post ('/debts/:id/notes', (req,res) => {
 	});
 });
 
-// EDIT FORM
-app.get ('/debts/:id/notes/:id/edit', (req, res) => {
-  Debt.findById (req.params.id, (err, foundDebt) => {
-    const debt = foundDebt;
-    if(err){
-      console.log(err);
-      res.redirect ('/debts');
-    } else {
-      Note.findById (req.params.id, (err, foundNote) => {
-        const note = foundNote;
-        if (err){
-          console.log(err);
-          res.redirect ('/debts/')
-        } else {
-          res.render ('pages/notes/editNote', {debt: foundDebt, note: foundNote});
-        }
-      });
-    }
-  });
-});
-
-// EDIT
-app.put ('/debts/:id/notes/:id', (req, res) => {
-  Debt.findByIdAndUpdate (req.params.id, req.body.debt, (err, foundId) => {
-    if(err){
-      console.log(err);
-      res.redirect ('/debts');
-    } else {
-      Note.findByIdAndUpdate (req.params.id, req.body.note, (err, foundNote) => {
-        if(err){
-          console.log(err);
-          res.redirect('/debts/' + foundId._id)
-        } else {
-          res.redirect ('/debts/:id' + foundId._id)
-        }
-      });
-    }
-  });
-});
-
 // DELETE
 app.delete ('/debts/:id/notes/:id',  (req, res) => {
   Debt.findByIdAndUpdate (req.params.id, req.body.debt, (err, foundDebt) => {
@@ -294,7 +254,7 @@ app.delete ('/debts/:id/notes/:id',  (req, res) => {
           console.log(err);
           res.redirect ('/debts/')
         } else {
-          res.redirect ('/debts/')
+          res.redirect ('/debts')
         }
       });
     }
